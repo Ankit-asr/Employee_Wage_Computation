@@ -7,7 +7,7 @@ namespace Employee_Wage_Computation
         static void Main(string[] args)
         {
             Employee obj = new Employee();
-            obj.EmployeeWageForMonth();
+            obj.ConditionalWage();
         }
     }
 }
