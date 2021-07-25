@@ -16,31 +16,29 @@ namespace Employee_Wage_Computation
         /// <summary>
         /// Check if an Employee is Part Time or Full Time and Calculate Wage
         /// </summary>
-        public void EmployeeType()
+        public void EmployeeDailyWageUsingSwitch()
         {
             Random random = new Random();
             //Computation
             int empCheck = random.Next(0, 3);
-            if (empCheck == IS_PART_TIME)
+            switch (empCheck)
             {
-                empHrs = 4;
-                Console.WriteLine("Employee is Part Time");
+                case IS_PART_TIME:
+                    empHrs = 4;
+                    Console.WriteLine("Employee is Part Time");
+                    break;
+                case IS_FULL_TIME:
+                    empHrs = 8;
+                    Console.WriteLine("Employee is Full Time");
+                    break;
+                default:
+                    empHrs = 0;
+                    Console.WriteLine("Employee is Absent");
 
-            }
-            else if (empCheck == IS_FULL_TIME)
-            {
-                empHrs = 8;
-                Console.WriteLine("Employee is Full Time");
-
-            }
-            else
-            {
-                empHrs = 0;
-                Console.WriteLine("Employee is Absent");
-
+                    break;
             }
             empWage = empHrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("Daily Wage of Employee is : " + empWage);
+            Console.WriteLine("Employee Wage : " + empWage);
         }
     }
 }
