@@ -7,22 +7,23 @@ namespace Employee_Wage_Computation
         const int IS_FULL_TIME = 2;
         const int IS_PART_TIME = 1;
         const int EMP_RATE_PER_HOUR = 20;
-        const int NUM_OF_WORKING_DAYS = 20;
-        const int MAX_HRS_IN_MONTH = 100;
         public static int empHrs = 0;
         public static int empWage = 0;
         public static void Main(string[] args)
         {
             Program obj = new Program();
             Console.WriteLine("Welcome to the Employee Wage Computation Program");
-            Program.ConditionalWage();
+            Program.EmployeeWage("DMART" , 10 , 20 , 100);
+            Program.EmployeeWage("BRIDGELABZ", 8 , 25, 120);
+
+
         }
-            public static void ConditionalWage()
-            {
+        public static void EmployeeWage(String Company, int empWagePerHour, int MAX_WORKING_DAYS_IN_MONTH, int MAX_HRS_IN_MONTH)
+        {
                 int totalEmpHrs = 0;
                 int totalWorkingDays = 0;
 
-                while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
+                while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS_IN_MONTH)
                 {
                     totalWorkingDays++;
                     Random random = new Random();
@@ -41,11 +42,13 @@ namespace Employee_Wage_Computation
                     }
                     empWage = empHrs * EMP_RATE_PER_HOUR;
                     totalEmpHrs += empHrs;
-                    Console.WriteLine("Day:" + totalWorkingDays + "Employee Work Hours:" + empHrs + "   Wage:" + empWage);
+                   // Console.WriteLine("Day:" + totalWorkingDays + "Employee Work Hours:" + empHrs + "   Wage:" + empWage);
                 }
                 int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-                Console.WriteLine("Total Employee Wage For Month : " + totalEmpWage);
-            }
+            // Console.WriteLine("Total Employee Wage For Month : " + totalEmpWage);
+            Console.WriteLine( Company + " Comapany Employee Wage for a Month is " + totalEmpWage);
+
         }
+    }
     }
 
