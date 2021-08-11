@@ -6,48 +6,58 @@ namespace Employee_Wage_Computation
 {
     class EmployeeWageBuilder
     {
-        public string company;
-        public int empWagePerHour;
-        public int maxWorkingDaysInMonth;
-        public int maxHoursPerMonth;
-        public const int IS_FULL_TIME = 2;
-        public const int IS_PART_TIME = 1;
-        public int empHrs = 0;
-        public int empWage = 0;
-        public EmployeeWageBuilder(string company, int empWagePerHour, int maxWorkingDaysInMonth, int maxHoursPerMonth)
+        Program program = new Program();
+        public int Days = 1;
+        public int Emp_Hrs = 0;
+        public int Working_Hrs = 0;
+        public String Choose = "";
+        public int counter = 0;
+        public void Wage_Computation()
         {
-            this.company = company;
-            this.empWagePerHour = empWagePerHour;
-            this.maxWorkingDaysInMonth = maxWorkingDaysInMonth;
-            this.maxHoursPerMonth = maxHoursPerMonth;
-        }
-        public void EmployeeWage()
-        {
-            int totalEmpHrs = 0;
-            int totalWorkingDays = 0;
-
-            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < maxWorkingDaysInMonth)
+            EmployeeWageBuilder emp = new EmployeeWageBuilder();
+            CompanyEmployeeWage obj = new CompanyEmployeeWage();
+            foreach (var data in Program.Company)
             {
-                totalWorkingDays++;
-                Random random = new Random();
-                int empCheck = random.Next(0, 3);
-                switch (empCheck)
+                while (Days <= data.Max_Working_Days && Working_Hrs <= data.Max_Working_Hours)
                 {
-                    case IS_PART_TIME:
-                        empHrs = 4;
-                        break;
-                    case IS_FULL_TIME:
-                        empHrs = 8;
-                        break;
-                    default:
-                        empHrs = 0;
-                        break;
+                    Random random = new Random();
+                    int Emp_Check = random.Next(0, 2);
+                    if (Emp_Check == 0)
+                    {
+                        Choose = "Part_Time";
+                    }
+                    else
+                    {
+                        Choose = "Full_Time";
+                    }
+
+                    switch (Choose)
+                    {
+                        case "Part_Time":
+                            Emp_Hrs = 4;
+                            Console.WriteLine("Employee is Absent" + "       " + "Employee Hrs is : " + Emp_Hrs);
+                            break;
+                        case "Full_Time":
+                            Emp_Hrs = 8;
+                            Console.WriteLine("Employee is Present" + "      " + "Employee Hrs is : " + Emp_Hrs);
+                            break;
+                        default:
+                            Console.WriteLine("Error");
+                            break;
+                    }
+                    Days++;
+                    Working_Hrs = Working_Hrs + Emp_Hrs;
+                    data.Total_Wage = Working_Hrs * data.Wage_Per_Hour;
                 }
-                empWage = empHrs * empWagePerHour;
-                totalEmpHrs += empHrs;
+                Days = 0;
+                Working_Hrs = 0;
+                emp.Display(data);
             }
-            int totalEmpWage = totalEmpHrs * empWagePerHour;
-            Console.WriteLine(company + " Company Employee Wage for a Month is " + totalEmpWage);
+        }
+        public void Display(CompanyEmployeeWage cmp)
+        {
+            Console.WriteLine("The Company " + cmp.Company_Name + " has a total Employee Wage of " + cmp.Total_Wage);
+            Console.WriteLine("  ");
         }
     }
 }
